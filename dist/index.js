@@ -18,6 +18,8 @@ var _React$StyleSheet$Text$View$ScrollView$TouchableOpacity = require('react-nat
 
 var _React$StyleSheet$Text$View$ScrollView$TouchableOpacity2 = _interopRequireWildcard(_React$StyleSheet$Text$View$ScrollView$TouchableOpacity);
 
+var { Dimensions } = React;
+
 // Using bare setTimeout, setInterval, setImmediate
 // and requestAnimationFrame calls is very dangerous
 // because if you forget to cancel the request before
@@ -28,7 +30,7 @@ var _TimerMixin = require('react-timer-mixin');
 
 var _TimerMixin2 = _interopRequireWildcard(_TimerMixin);
 
-var _Dimensions = require('Dimensions');
+var _Dimensions = Dimensions;
 
 var _Dimensions2 = _interopRequireWildcard(_Dimensions);
 
