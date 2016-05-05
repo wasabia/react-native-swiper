@@ -321,6 +321,8 @@ module.exports = _reactNative2.default.createClass({
    * @param  {number} index offset index
    */
   scrollTo: function scrollTo(index) {
+    var _this4 = this;
+
     if (this.state.isScrolling || this.state.total < 2) return;
     var state = this.state;
     var diff = (this.props.loop ? 1 : 0) + index + this.state.index;
@@ -328,13 +330,26 @@ module.exports = _reactNative2.default.createClass({
     var y = 0;
     if (state.dir == 'x') x = diff * state.width;
     if (state.dir == 'y') y = diff * state.height;
-    this.refs.scrollView && this.refs.scrollView.scrollTo(y, x);
+
+    if (_reactNative.Platform.OS === 'android') {
+      this.refs.scrollView && this.refs.scrollView.setPage(diff);
+    } else {
+      this.refs.scrollView && this.refs.scrollView.scrollTo({ x: x, y: y });
+    }
 
     // update scroll state
     this.setState({
       isScrolling: true,
       autoplayEnd: false
     });
+
+    if (_reactNative.Platform.OS === 'android') {
+      this.setTimeout(function () {
+        _this4.onScrollEnd({
+          nativeEvent: { position: diff }
+        });
+      }, 50);
+    }
   },
 
 
@@ -388,7 +403,7 @@ module.exports = _reactNative2.default.createClass({
     ) : null;
   },
   renderNextButton: function renderNextButton() {
-    var _this4 = this;
+    var _this5 = this;
 
     var button = void 0;
 
@@ -403,7 +418,7 @@ module.exports = _reactNative2.default.createClass({
     return _reactNative2.default.createElement(
       _reactNative.TouchableOpacity,
       { onPress: function onPress() {
-          return button !== null && _this4.scrollTo.call(_this4, 1);
+          return button !== null && _this5.scrollTo.call(_this5, 1);
         } },
       _reactNative2.default.createElement(
         _reactNative.View,
@@ -413,7 +428,7 @@ module.exports = _reactNative2.default.createClass({
     );
   },
   renderPrevButton: function renderPrevButton() {
-    var _this5 = this;
+    var _this6 = this;
 
     var button = null;
 
@@ -428,7 +443,7 @@ module.exports = _reactNative2.default.createClass({
     return _reactNative2.default.createElement(
       _reactNative.TouchableOpacity,
       { onPress: function onPress() {
-          return button !== null && _this5.scrollTo.call(_this5, -1);
+          return button !== null && _this6.scrollTo.call(_this6, -1);
         } },
       _reactNative2.default.createElement(
         _reactNative.View,
@@ -460,9 +475,10 @@ module.exports = _reactNative2.default.createClass({
     } else if (_reactNative.Platform.OS === 'android') {
       return _reactNative2.default.createElement(
         _reactNative.ViewPagerAndroid,
-        { ref: 'scrollView',
+        _extends({ ref: 'scrollView'
+        }, this.props, {
           onPageSelected: this.onScrollEnd,
-          style: { flex: 1 } },
+          style: { flex: 1 } }),
         pages
       );
     }
@@ -474,7 +490,7 @@ module.exports = _reactNative2.default.createClass({
    * @return {object} props injected props
    */
   injectState: function injectState(props) {
-    var _this6 = this;
+    var _this7 = this;
 
     /*    const scrollResponders = [
           'onMomentumScrollBegin',
@@ -490,7 +506,7 @@ module.exports = _reactNative2.default.createClass({
         (function () {
           var originResponder = props[prop];
           props[prop] = function (e) {
-            return originResponder(e, _this6.state, _this6);
+            return originResponder(e, _this7.state, _this7);
           };
         })();
       }
