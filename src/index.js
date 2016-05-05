@@ -3,11 +3,11 @@
  * @author leecade<leecade@163.com>
  */
 import React, {
+  Dimensions,
   StyleSheet,
   Text,
   View,
   ScrollView,
-  Dimensions,
   TouchableOpacity,
   ViewPagerAndroid,
   Platform
