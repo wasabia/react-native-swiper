@@ -441,6 +441,7 @@ module.exports = React.createClass({
     } else if (Platform.OS === 'android') {
       return (
         <ViewPagerAndroid ref="scrollView"
+          {...this.props}
           onPageSelected={this.onScrollEnd}
           style={{flex: 1}}>
             {pages}
