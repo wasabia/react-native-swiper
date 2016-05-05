@@ -446,23 +446,26 @@ module.exports = _reactNative2.default.createClass({
     );
   },
   renderScrollView: function renderScrollView(pages) {
-    if (_reactNative.Platform.OS === 'ios') return _reactNative2.default.createElement(
-      _reactNative.ScrollView,
-      _extends({ ref: 'scrollView'
-      }, this.props, {
-        contentContainerStyle: [styles.wrapper, this.props.style],
-        contentOffset: this.state.offset,
-        onScrollBeginDrag: this.onScrollBegin,
-        onMomentumScrollEnd: this.onScrollEnd }),
-      pages
-    );
-    return _reactNative2.default.createElement(
-      _reactNative.ViewPagerAndroid,
-      { ref: 'scrollView',
-        onPageSelected: this.onScrollEnd,
-        style: { flex: 1 } },
-      pages
-    );
+    if (_reactNative.Platform.OS === 'ios') {
+      return _reactNative2.default.createElement(
+        _reactNative.ScrollView,
+        _extends({ ref: 'scrollView'
+        }, this.props, {
+          contentContainerStyle: [styles.wrapper, this.props.style],
+          contentOffset: this.state.offset,
+          onScrollBeginDrag: this.onScrollBegin,
+          onMomentumScrollEnd: this.onScrollEnd }),
+        pages
+      );
+    } else if (_reactNative.Platform.OS === 'android') {
+      return _reactNative2.default.createElement(
+        _reactNative.ViewPagerAndroid,
+        { ref: 'scrollView',
+          onPageSelected: this.onScrollEnd,
+          style: { flex: 1 } },
+        pages
+      );
+    }
   },
 
   /**

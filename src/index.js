@@ -425,25 +425,28 @@ module.exports = React.createClass({
       </View>
     )
   },
+
   renderScrollView(pages) {
-     if (Platform.OS === 'ios')
-         return (
-            <ScrollView ref="scrollView"
-             {...this.props}
-                       contentContainerStyle={[styles.wrapper, this.props.style]}
-                       contentOffset={this.state.offset}
-                       onScrollBeginDrag={this.onScrollBegin}
-                       onMomentumScrollEnd={this.onScrollEnd}>
-             {pages}
-            </ScrollView>
-         );
+     if (Platform.OS === 'ios') {
       return (
-         <ViewPagerAndroid ref="scrollView"
-            onPageSelected={this.onScrollEnd}
-            style={{flex: 1}}>
+        <ScrollView ref="scrollView"
+          {...this.props}
+          contentContainerStyle={[styles.wrapper, this.props.style]}
+          contentOffset={this.state.offset}
+          onScrollBeginDrag={this.onScrollBegin}
+          onMomentumScrollEnd={this.onScrollEnd}>
             {pages}
-         </ViewPagerAndroid>
+        </ScrollView>
       );
+    } else if (Platform.OS === 'android') {
+      return (
+        <ViewPagerAndroid ref="scrollView"
+          onPageSelected={this.onScrollEnd}
+          style={{flex: 1}}>
+            {pages}
+        </ViewPagerAndroid>
+      );
+    }
   },
   /**
    * Inject state to ScrollResponder
