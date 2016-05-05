@@ -244,6 +244,8 @@ module.exports = React.createClass({
    */
   onScrollEnd(e) {
 
+    console.log(` scrollEnd... `);
+
     // update scroll state
     this.setState({
       isScrolling: false
@@ -338,6 +340,8 @@ module.exports = React.createClass({
     if(state.dir == 'x') x = diff * state.width
     if(state.dir == 'y') y = diff * state.height
 
+    console.log(` scrollTo: diff: ${diff} x: ${x} y: ${y} `);
+
     if (Platform.OS === 'android') {
       this.refs.scrollView && this.refs.scrollView.setPage(diff)
     } else {
@@ -350,13 +354,13 @@ module.exports = React.createClass({
       autoplayEnd: false,
     })
 
-    if (Platform.OS === 'android') {
-      this.setTimeout(() => {
-        this.onScrollEnd({
-          nativeEvent: {position: diff}
-        });
-      }, 50);
-    }
+    // if (Platform.OS === 'android') {
+    //   this.setTimeout(() => {
+    //     this.onScrollEnd({
+    //       nativeEvent: {position: diff}
+    //     });
+    //   }, 50);
+    // }
   },
 
   /**
