@@ -313,7 +313,26 @@ module.exports = React.createClass({
   scrollTo(index) {
     if (this.state.isScrolling || this.state.total < 2) return
     let state = this.state
-    let diff = (this.props.loop ? 1 : 0) + index + this.state.index
+
+    let diff = index + this.state.index;
+
+    if (this.props.loop) {
+      if (diff < 0) {
+        diff = this.state.total - 1;
+      }
+      if (diff > this.state.total - 1) {
+        diff = 0;
+      }
+    } else {
+      if (diff < 0) {
+        diff = 0;
+      }
+      if (diff > this.state.total - 1) {
+        diff = this.state.total - 1;
+      }
+    }
+
+
     let x = 0
     let y = 0
     if(state.dir == 'x') x = diff * state.width

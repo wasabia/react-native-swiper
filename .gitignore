@@ -3,7 +3,8 @@
 # Logs
 logs
 *.log
-
+.tags
+.tags*
 # Runtime data
 pids
 *.pid
