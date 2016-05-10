@@ -98,7 +98,7 @@ var styles = _reactNative.StyleSheet.create({
 
   buttonText: {
     fontSize: 50,
-    color: '#007aff',
+    color: '#ff4068',
     fontFamily: 'Arial'
   }
 });
@@ -344,6 +344,8 @@ module.exports = _reactNative2.default.createClass({
       }
     }
 
+    console.log(' scrollTo: ' + diff + ' x: ' + x + ' y: ' + y + '  ');
+
     var x = 0;
     var y = 0;
     if (state.dir == 'x') x = diff * state.width;
@@ -384,7 +386,7 @@ module.exports = _reactNative2.default.createClass({
 
     var dots = [];
     var ActiveDot = this.props.activeDot || _reactNative2.default.createElement(_reactNative.View, { style: {
-        backgroundColor: '#007aff',
+        backgroundColor: '#ff4068',
         width: 8,
         height: 8,
         borderRadius: 4,

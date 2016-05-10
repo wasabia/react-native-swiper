@@ -91,7 +91,7 @@ let styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 50,
-    color: '#007aff',
+    color: '#ff4068',
     fontFamily: 'Arial',
   },
 })
@@ -334,6 +334,7 @@ module.exports = React.createClass({
       }
     }
 
+    console.log(` scrollTo: ${diff} x: ${x} y: ${y}  `);
 
     let x = 0
     let y = 0
@@ -374,7 +375,7 @@ module.exports = React.createClass({
 
     let dots = []
     let ActiveDot = this.props.activeDot || <View style={{
-            backgroundColor: '#007aff',
+            backgroundColor: '#ff4068',
             width: 8,
             height: 8,
             borderRadius: 4,
